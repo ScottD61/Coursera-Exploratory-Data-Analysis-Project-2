@@ -24,24 +24,3 @@ a <- ggplot(SCCLB1, aes(x = year, y = Emissions)) + geom_bar(aes(fill = year), s
     theme(legend.position = "none")  
 print(a)
 dev.off()
-
-
-
-
-
-#Set veh as dataframe
-veh1 <- as.data.frame(vehicles)
-write.table(veh, file = "/Users/scdavis6/Desktop/vehicles.csv")
-
-#CREATE NEW INDEX OF DATA B/C OLD ONE HAS ROW NUMBERS, NOT THE ACTUAL SCC DATA
-
-#Index values from SCC dataframe
-veh2 <- SCC[542:2196,]
-#Merged values in baltimore data.frame by remaining SCC values 
-merged <- merge(Balt, SCC, allow.cartesian = TRUE, by.x = 'SCC')
-#Set the order
-Years <- ordered(merged$year, levels = c("1999", "2002", "2005", "2008"))
-#Create plot
-qplot(Years, Emissions, data = merged)
-
-veh2 <- merge(veh1, Balt, by.x = SCC)
